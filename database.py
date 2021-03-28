@@ -6,7 +6,7 @@ host = 'mongodb://root:jsdavnsdancasdkhlvb2314jknsvb@87.249.221.208:5151/?authSo
 client = pymongo.MongoClient(host)
 
 # Connect to our database
-db = client['admin']
+db = client['test']
 
 # Fetch our series collection
 series_collection = db['Vertexes']
