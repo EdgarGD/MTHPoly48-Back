@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
-import networkx as nx
 from typing import Dict
+from database import insert_document
 
-file = 'Polytech_total.graphml'#'vsel_own_full.graphml'
+file = 'Polytech_total.graphml'
 
 
 class Vertex:
@@ -10,10 +10,20 @@ class Vertex:
         self.id = id
         self.label = label
         self.color = color
+        self.topic = 'BasicTopic'
         self.edges = []
 
     def __str__(self):
-        return f'Vertex({self.id},{self.color},{self.label},{self.edges})'
+        return f'Vertex({self.id},{self.color},{self.label},{self.topic},{self.edges})'
+
+    def toDict(self):
+        return {
+            'id': self.id,
+            'color': self.color,
+            'label': self.label,
+            'topic': self.topic,
+            'edges': [{'target_id': i, 'label': l} for i, l in self.edges]
+                }
 
 
 G: Dict[str, Vertex] = dict()
@@ -51,3 +61,7 @@ for child in graph:
                 if lineEngine.find(yworks+'EdgeLabel') is not None:
                     label = lineEngine.find(yworks+'EdgeLabel').text
         G[v1].edges.append((v2, label))
+
+for vertex in G.values():
+    vertex: Vertex
+    insert_document(vertex.toDict())
