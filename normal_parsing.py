@@ -142,11 +142,12 @@ update_topic_sets(nauka_file, nauka)
 update_topic_sets(mozg_file, mozg)
 update_topic_sets(medistina_file, medistina)
 update_topic_sets(materiya_file, materiya)
-update_topic_sets(materialy_file, materiya)
+update_topic_sets(materialy_file, materialy)
 update_topic_sets(IT_file, IT)
 update_topic_sets(energiya_file, energiya)
+update_topic_sets(yazik_file, yazik)
 
 G = parser_graphml(file)
 
-for vertex in G:
-    insert_document(G[vertex].toDict())
+#for vertex in G:
+#    insert_document(G[vertex].toDict())
